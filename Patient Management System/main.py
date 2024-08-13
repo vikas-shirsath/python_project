@@ -40,24 +40,27 @@ class linked_list:
         if current_node.name == search_name :
             print(f"[{current_node.name},{current_node.disease},{current_node.priority}]")
 
-    def add_after_severe(self):
-        pass
-
-    def add_node(self):
-        name = input("Enter name of patient : ")
-        disease = input("Disease of pateint : ")
-        priority = input("Priority of pateint [severe / intermediate / mild] : ")
-
+    def add_after_severe(self,name,disease,priority):
         new_node = Node (name, disease, priority)
         if self.head == None :
             self.head = new_node
             return
         
         current_node = self.head
-        while current_node.next != None :
-            current_node = current_node.next
+        while current_node.next.priority != "intermediate" :
+            current_node  = current_node.next
 
+        new_node.next = current_node.next
         current_node.next = new_node
+             
+
+    def add_node(self):
+        name = input("Enter name of patient : ")
+        disease = input("Disease of pateint : ")
+        priority = input("Priority of pateint [severe / intermediate / mild] : ")
+
+        if disease == "Severe" :
+            add_after_severe(name,disease,priority)
 
 def menu():
     print("1. Add ")
