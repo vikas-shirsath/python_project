@@ -47,20 +47,38 @@ class linked_list:
             return
         
         current_node = self.head
-        while current_node.next.priority != "intermediate" :
-            current_node  = current_node.next
+        # If there is no "severe" case, add the node at the end
+        while current_node.next is not None and current_node.next.priority == "severe":
+            current_node = current_node.next
 
         new_node.next = current_node.next
         current_node.next = new_node
-             
+     
+    def add_after_internediate(self,name,disease,priority) :
+        name = input("Enter name of patient : ")
+        disease = input("Disease of pateint : ")
+        priority = input("Priority of pateint [severe / intermediate / mild] : ")
+
+        if disease == "severe" :
+            self.add_after_severe(name,disease,priority)
+        elif disease == "intermediate":
+            self.add_after_intermediate(name,disease,priority)    
+            
+    def add_at_end(self,name,disease,priority)  :
+        pass
 
     def add_node(self):
         name = input("Enter name of patient : ")
         disease = input("Disease of pateint : ")
         priority = input("Priority of pateint [severe / intermediate / mild] : ")
 
-        if disease == "Severe" :
-            add_after_severe(name,disease,priority)
+        if disease == "severe" :
+            self.add_after_severe(name,disease,priority)
+        elif disease == "intermediate":
+            self.add_after_intermediate(name,disease,priority)
+        else:
+            self.add_at_end(name,disease,priority)
+            return
 
 def menu():
     print("1. Add ")
